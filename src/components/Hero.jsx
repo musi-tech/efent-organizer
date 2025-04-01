@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
+import vid from "../assets/vid.webm"; // Corrected import
+import adVideo from "../assets/konkan.webm"; // Corrected import
 
 class Hero extends Component {
   constructor(props) {
@@ -44,13 +46,13 @@ class Hero extends Component {
             className={`absolute inset-0 w-full h-full object-cover brightness-[1.2] transition-opacity duration-500 ${
               videoLoaded ? "opacity-100" : "opacity-0"
             }`}
-            src={require("../assets/vid.webm")}
+            src={vid}
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            onCanPlayThrough={this.handleVideoCanPlayThrough}
+            onLoadedData={this.handleVideoCanPlayThrough} // Corrected event
           ></video>
         </div>
 
@@ -64,20 +66,18 @@ class Hero extends Component {
           </div>
         )}
 
-        {/* Ad Section - 9:16 Aspect Ratio, No Default Controls, Auto Loop */}
+        {/* Ad Section */}
         {showAd && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="relative w-[300px] h-[533px] bg-black/80 p-2 rounded-lg flex flex-col items-center justify-center shadow-lg">
               <video
                 className="w-full h-full object-cover rounded-lg"
-                src={require("../assets/konkan.webm")}
+                src={adVideo}
                 autoPlay
                 loop
                 playsInline
                 preload="auto"
                 muted={false}
-                onCanPlayThrough={this.handleVideoCanPlayThrough}
-
               ></video>
               {adSkippable && (
                 <button
