@@ -6,6 +6,8 @@ class Hero extends Component {
     super(props);
     this.state = {
       videoLoaded: false,
+      showAd: true,
+      adSkippable: false,
     };
   }
 
@@ -13,8 +15,23 @@ class Hero extends Component {
     this.setState({ videoLoaded: true });
   };
 
+  componentDidMount() {
+    // Allow skipping the ad after 5 seconds
+    this.adSkipTimer = setTimeout(() => {
+      this.setState({ adSkippable: true });
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.adSkipTimer);
+  }
+
+  handleSkipAd = () => {
+    this.setState({ showAd: false });
+  };
+
   render() {
-    const { videoLoaded } = this.state;
+    const { videoLoaded, showAd, adSkippable } = this.state;
 
     return (
       <section
@@ -47,42 +64,63 @@ class Hero extends Component {
           </div>
         )}
 
-        {/* Event Planner Nameplate - Positioned at the bottom */}
-      {/* Mobile View - Show Only 'Get Started' Button */}
-<div className="absolute inset-x-0 bottom-10 flex sm:hidden justify-center">
-  <button className="bg-white/20 backdrop-blur-md text-white px-6 py-3 rounded-full font-semibold">
-    Get Started
-  </button>
-</div>
+        {/* Ad Section - 9:16 Aspect Ratio, No Default Controls, Auto Loop */}
+        {showAd && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <div className="relative w-[300px] h-[533px] bg-black/80 p-2 rounded-lg flex flex-col items-center justify-center shadow-lg">
+              <video
+                className="w-full h-full object-cover rounded-lg"
+                src={require("../assets/konkan.mp4")}
+                autoPlay
+                loop
+                playsInline
+                muted={false}
+              ></video>
+              {adSkippable && (
+                <button
+                  onClick={this.handleSkipAd}
+                  className="absolute top-2 right-2 bg-red-600 text-white px-3 py-2 text-sm rounded"
+                >
+                  Skip Ad
+                </button>
+              )}
+            </div>
+          </div>
+        )}
 
-{/* Desktop View - Show Full Search Bar */}
-<div className="absolute inset-x-0 bottom-1/2 translate-y-1/2 sm:bottom-20 w-full hidden sm:flex justify-center px-4">
-  <div className="w-full flex items-center bg-white/20 backdrop-blur-md rounded-full shadow-md overflow-hidden max-w-3xl mx-auto">
-    {/* City Dropdown */}
-    <select className="px-4 py-3 bg-transparent text-white font-semibold rounded-l-full outline-none">
-      <option className="text-black">Select City</option>
-      <option className="text-black">Mumbai</option>
-      <option className="text-black">Pune</option>
-      <option className="text-black">Delhi</option>
-      <option className="text-black">Bangalore</option>
-    </select>
+        {/* Mobile View - Show Only 'Get Started' Button */}
+        <div className="absolute inset-x-0 bottom-10 flex sm:hidden justify-center">
+          <button className="bg-white/20 backdrop-blur-md text-white px-6 py-3 rounded-full font-semibold">
+            Get Started
+          </button>
+        </div>
 
-    {/* Search Input */}
-    <input
-      type="text"
-      placeholder="Search for Venues, Caterers, Decorators..."
-      className="flex-1 px-4 py-3 outline-none bg-transparent text-white placeholder-white"
-    />
+        {/* Desktop View - Show Full Search Bar */}
+        <div className="absolute inset-x-0 bottom-1/2 translate-y-1/2 sm:bottom-20 w-full hidden sm:flex justify-center px-4">
+          <div className="w-full flex items-center bg-white/20 backdrop-blur-md rounded-full shadow-md overflow-hidden max-w-3xl mx-auto">
+            {/* City Dropdown */}
+            <select className="px-4 py-3 bg-transparent text-white font-semibold rounded-l-full outline-none">
+              <option className="text-black">Select City</option>
+              <option className="text-black">Mumbai</option>
+              <option className="text-black">Pune</option>
+              <option className="text-black">Delhi</option>
+              <option className="text-black">Bangalore</option>
+            </select>
 
-    {/* Plan Now Button */}
-    <button className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 font-semibold rounded-r-full">
-      <FaSearch />
-      Get Started
-    </button>
-  </div>
-</div>
+            {/* Search Input */}
+            <input
+              type="text"
+              placeholder="Search for Venues, Caterers, Decorators..."
+              className="flex-1 px-4 py-3 outline-none bg-transparent text-white placeholder-white"
+            />
 
-
+            {/* Plan Now Button */}
+            <button className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 font-semibold rounded-r-full">
+              <FaSearch />
+              Get Started
+            </button>
+          </div>
+        </div>
       </section>
     );
   }

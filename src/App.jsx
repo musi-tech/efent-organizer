@@ -16,7 +16,7 @@ import Photographers from './pages/photographers.jsx'
 import Venues from './pages/venues.jsx'
 import Artists from './pages/artists.jsx'
 import Djs from './pages/djs.jsx'
-
+import Home from './pages/Home.jsx'
 
 function App() {
   return (
@@ -40,6 +40,7 @@ function App() {
         <Route path="/venues" element={<Venues />} />
         <Route path="/artists" element={<Artists />} />
         <Route path="/djs" element={<Djs />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </>
   );
