@@ -70,7 +70,7 @@ class Hero extends Component {
             <div className="relative w-[300px] h-[533px] bg-black/80 p-2 rounded-lg flex flex-col items-center justify-center shadow-lg">
               <video
                 className="w-full h-full object-cover rounded-lg"
-                src={require("../assets/konkan.mp4")}
+                src={require("../assets/konkan.webm")}
                 autoPlay
                 loop
                 playsInline

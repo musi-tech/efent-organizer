@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import konkanVideo from "../assets/konkan.mp4";
+import konkanVideo from "../assets/konkan.webm";
 
 const HeroWithVideo = () => {
   const [showVideo, setShowVideo] = useState(true);
