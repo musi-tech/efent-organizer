@@ -74,7 +74,10 @@ class Hero extends Component {
                 autoPlay
                 loop
                 playsInline
+                preload="auto"
                 muted={false}
+                onCanPlayThrough={this.handleVideoCanPlayThrough}
+
               ></video>
               {adSkippable && (
                 <button
