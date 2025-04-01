@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import vid from "../assets/vid.webm"; // Corrected import
-import adVideo from "../assets/konkan.webm"; // Corrected import
+import adVideo from "../assets/konkan1.webm"; // Corrected import
 
 class Hero extends Component {
   constructor(props) {
@@ -66,30 +66,30 @@ class Hero extends Component {
           </div>
         )}
 
-        {/* Ad Section */}
-        {showAd && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-            <div className="relative w-[300px] h-[533px] bg-black/80 p-2 rounded-lg flex flex-col items-center justify-center shadow-lg">
-              <video
-                className="w-full h-full object-cover rounded-lg"
-                src={adVideo}
-                autoPlay
-                loop
-                playsInline
-                preload="auto"
-                muted={false}
-              ></video>
-              {adSkippable && (
-                <button
-                  onClick={this.handleSkipAd}
-                  className="absolute top-2 right-2 bg-red-600 text-white px-3 py-2 text-sm rounded"
-                >
-                  Skip Ad
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+  {/* Ad Section */}
+{showAd && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    <div className="relative w-[450px] h-[450px] bg-black/80 p-2 rounded-lg flex flex-col items-center justify-center shadow-lg">
+      <video
+        className="w-full h-full object-cover rounded-lg"
+        src={adVideo}
+        autoPlay
+        loop
+        playsInline
+        preload="auto"
+        muted={false}
+      ></video>
+      {adSkippable && (
+        <button
+          onClick={this.handleSkipAd}
+          className="absolute top-2 right-2 bg-red-600 text-white px-3 py-2 text-sm rounded"
+        >
+          Skip Ad
+        </button>
+      )}
+    </div>
+  </div>
+)}
 
         {/* Mobile View - Show Only 'Get Started' Button */}
         <div className="absolute inset-x-0 bottom-10 flex sm:hidden justify-center">
