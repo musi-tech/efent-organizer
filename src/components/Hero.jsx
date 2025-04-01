@@ -62,6 +62,7 @@ class Hero extends Component {
     <select className="px-4 py-3 bg-transparent text-white font-semibold rounded-l-full outline-none">
       <option className="text-black">Select City</option>
       <option className="text-black">Mumbai</option>
+      <option className="text-black">Pune</option>
       <option className="text-black">Delhi</option>
       <option className="text-black">Bangalore</option>
     </select>

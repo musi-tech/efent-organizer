@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import { FaBullhorn, FaChartLine, FaSearch, FaHandshake, FaUsers, FaHeart, FaFire, FaFutbol } from "react-icons/fa";
+import { FaBullhorn, FaChartLine, FaSearch, FaHandshake, FaUsers, FaHeart, FaFire, FaFutbol, FaGlobe } from "react-icons/fa";
 import { IoLogoWhatsapp } from 'react-icons/io';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -92,6 +92,15 @@ const EventManagementPage = () => {
           We specialize in organizing impactful corporate events that align with your company’s goals, including conferences, workshops, and seminars.
         </p>
       </div>
+
+      {/* Trip Organization & Travel Services */}
+<div className="bg-[#FFF3CD] p-6 rounded-lg shadow-lg">
+  <FaGlobe className="text-purple-600 text-4xl mb-4" />
+  <h2 className="text-2xl font-semibold mb-4">Trip Organization & Travel Services</h2>
+  <p>
+    We offer seamless trip planning and travel services, ensuring hassle-free experiences for corporate retreats, team outings, and personalized journeys.
+  </p>
+</div>
       
       {/* Exhibitions */}
       <div className="bg-[#FFF3CD] p-6 rounded-lg shadow-lg">
