@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import vid from "../assets/vid.webm"; // Corrected import
-import adVideo from "../assets/konkan1.webm"; // Corrected import
+import adVideo from "../assets/konkan11.webm"; // Corrected import
 
 class Hero extends Component {
   constructor(props) {
