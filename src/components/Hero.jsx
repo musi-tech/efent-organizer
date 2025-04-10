@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
-import vid from "../assets/vid.webm"; // Corrected import
-import adVideo from "../assets/konkan11.webm"; // Corrected import
+import InquiryForm from "./InquiryForm";
+import vid from "../assets/vid.webm";
 
 class Hero extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class Hero extends Component {
       videoLoaded: false,
       showAd: true,
       adSkippable: false,
+      showInquiryForm: false, // Added state for form
     };
   }
 
@@ -18,7 +19,6 @@ class Hero extends Component {
   };
 
   componentDidMount() {
-    // Allow skipping the ad after 5 seconds
     this.adSkipTimer = setTimeout(() => {
       this.setState({ adSkippable: true });
     }, 5000);
@@ -32,8 +32,14 @@ class Hero extends Component {
     this.setState({ showAd: false });
   };
 
+  toggleInquiryForm = () => {
+    this.setState((prevState) => ({
+      showInquiryForm: !prevState.showInquiryForm,
+    }));
+  };
+
   render() {
-    const { videoLoaded, showAd, adSkippable } = this.state;
+    const { videoLoaded, showAd, adSkippable, showInquiryForm } = this.state;
 
     return (
       <section
@@ -52,7 +58,7 @@ class Hero extends Component {
             muted
             playsInline
             preload="auto"
-            onLoadedData={this.handleVideoCanPlayThrough} // Corrected event
+            onLoadedData={this.handleVideoCanPlayThrough}
           ></video>
         </div>
 
@@ -66,64 +72,32 @@ class Hero extends Component {
           </div>
         )}
 
-  {/* Ad Section */}
-{showAd && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div className="relative w-[450px] h-[450px] bg-black/80 p-2 rounded-lg flex flex-col items-center justify-center shadow-lg">
-      <video
-        className="w-full h-full object-cover rounded-lg"
-        src={adVideo}
-        autoPlay
-        loop
-        playsInline
-        preload="auto"
-        muted={false}
-      ></video>
-      {adSkippable && (
+        {/* Inquire Now Button */}
         <button
-          onClick={this.handleSkipAd}
-          className="absolute top-2 right-2 bg-red-600 text-white px-3 py-2 text-sm rounded"
-        >
-          Skip Ad
-        </button>
-      )}
-    </div>
-  </div>
-)}
+  onClick={this.toggleInquiryForm}
+  className="absolute top-1/2 right-6 transform -translate-y-1/2 px-6 py-3 rounded-full z-20 font-medium flex items-center group transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400/50 backdrop-blur-md bg-white/10 border border-pink-500/30 shadow-[0_8px_30px_rgb(255,105,180,0.12)] hover:shadow-[0_8px_30px_rgb(255,105,180,0.3)]"
+>
+  <span className="text-pink-200 group-hover:text-white transition-all duration-300 mr-2 tracking-wide font-semibold drop-shadow-md">
+    Inquire Now
+  </span>
+  <svg
+    className="w-5 h-5 text-pink-300 group-hover:translate-x-1 group-hover:text-white transition-all duration-300"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+  </svg>
 
-        {/* Mobile View - Show Only 'Get Started' Button */}
-        <div className="absolute inset-x-0 bottom-10 flex sm:hidden justify-center">
-          <button className="bg-white/20 backdrop-blur-md text-white px-6 py-3 rounded-full font-semibold">
-            Get Started
-          </button>
-        </div>
+  {/* Neon Side Glow Effects */}
+  <span className="absolute top-1/2 left-0 h-[60%] w-1 bg-pink-500 rounded-full blur-sm opacity-70 animate-pulse -translate-y-1/2"></span>
+  <span className="absolute top-1/2 right-0 h-[60%] w-1 bg-purple-500 rounded-full blur-sm opacity-70 animate-pulse -translate-y-1/2"></span>
+</button>
 
-        {/* Desktop View - Show Full Search Bar */}
-        <div className="absolute inset-x-0 bottom-1/2 translate-y-1/2 sm:bottom-20 w-full hidden sm:flex justify-center px-4">
-          <div className="w-full flex items-center bg-white/20 backdrop-blur-md rounded-full shadow-md overflow-hidden max-w-3xl mx-auto">
-            {/* City Dropdown */}
-            <select className="px-4 py-3 bg-transparent text-white font-semibold rounded-l-full outline-none">
-              <option className="text-black">Select City</option>
-              <option className="text-black">Mumbai</option>
-              <option className="text-black">Pune</option>
-              <option className="text-black">Delhi</option>
-              <option className="text-black">Bangalore</option>
-            </select>
 
-            {/* Search Input */}
-            <input
-              type="text"
-              placeholder="Search for Venues, Caterers, Decorators..."
-              className="flex-1 px-4 py-3 outline-none bg-transparent text-white placeholder-white"
-            />
-
-            {/* Plan Now Button */}
-            <button className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 font-semibold rounded-r-full">
-              <FaSearch />
-              Get Started
-            </button>
-          </div>
-        </div>
+        {/* Inquiry Form */}
+        {showInquiryForm && <InquiryForm onClose={this.toggleInquiryForm} />}
       </section>
     );
   }

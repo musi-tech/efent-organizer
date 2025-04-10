@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { FaWhatsapp, FaInstagram, FaPhone, FaRobot, FaTimes, FaEnvelope } from "react-icons/fa"; // Updated import
+import {
+  FaWhatsapp,
+  FaInstagram,
+  FaPhone,
+  FaTimes,
+  FaEnvelope,
+} from "react-icons/fa";
+import { FaCommentDots } from "react-icons/fa"; // Add this import at the top
+// Cat icon from game icons
 import { motion } from "framer-motion";
-
 
 const FloatingActionButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,22 +48,23 @@ const FloatingActionButton = () => {
     <div className="fixed bottom-8 right-8 z-50">
       {/* Main Button */}
       <motion.div
-        onClick={toggleOptions}
-        className={`bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white p-4 rounded-full shadow-xl cursor-pointer hover:scale-110 transition-transform ${
-          isOpen ? "bg-red-600" : ""
-        }`}
-        initial={{ scale: 1 }}
-        animate={{
-          scale: [1, 1.2, 1],
-          transition: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: 1.5,
-          },
-        }}
-      >
-        {isOpen ? <FaTimes size={30} /> : <FaRobot size={30} />} {/* Updated logo */}
-      </motion.div>
+  onClick={toggleOptions}
+  className="bg-[#f50057] text-white p-4 rounded-full shadow-lg cursor-pointer"
+  initial={{ scale: 1 }}
+  animate={{
+    scale: [1, 1.2, 1],
+    transition: {
+      repeat: Infinity,
+      repeatType: "loop",
+      duration: 1.2,
+      ease: "easeInOut",
+    },
+  }}
+  whileHover={{ scale: 1.1 }}
+>
+  {isOpen ? <FaTimes size={30} /> : <FaCommentDots size={24} />}
+</motion.div>
+
 
       {/* Options */}
       {isOpen && (
@@ -73,7 +81,8 @@ const FloatingActionButton = () => {
               WhatsApp
             </span>
           </div>
-          {/* Contact */}
+
+          {/* Contact Form */}
           <div
             onClick={() => handleOptionClick("contact")}
             className="relative group"
@@ -85,18 +94,20 @@ const FloatingActionButton = () => {
               Contact Form
             </span>
           </div>
+
           {/* Instagram */}
           <div
             onClick={() => handleOptionClick("instagram")}
             className="relative group"
           >
-            <div className="bg-pink-600 text-white p-4 rounded-full shadow-lg cursor-pointer hover:bg-pink-600 transition-transform flex items-center justify-center">
+            <div className="bg-pink-600 text-white p-4 rounded-full shadow-lg cursor-pointer hover:bg-pink-700 transition-transform flex items-center justify-center">
               <FaInstagram size={25} />
             </div>
             <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity">
               Instagram
             </span>
           </div>
+
           {/* Call Now */}
           <div
             onClick={() => handleOptionClick("call")}
